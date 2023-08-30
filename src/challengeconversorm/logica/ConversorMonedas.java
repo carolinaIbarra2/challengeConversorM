@@ -4,9 +4,12 @@ public class ConversorMonedas{
 
     private double cantidad;
 
-    public ConversorMonedas(double cantidad) {
+    public ConversorMonedas(double cantidad) {        
+       
         this.cantidad = cantidad;
     }
+    
+    
     
     public double operacionesConversor(String divisa1, String divisa2){
         FactorConversionMonedas operaciones = new FactorConversionMonedas();

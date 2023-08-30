@@ -1,7 +1,7 @@
 package challengeconversorm.logica;
 
-
 public class ConversorTemperatura {
+   
     private double cantidad;
 
     public ConversorTemperatura(double cantidad) {

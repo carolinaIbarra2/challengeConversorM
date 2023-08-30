@@ -1,6 +1,7 @@
 package challengeconversorm.igu;
 
 import challengeconversorm.logica.ConversorTemperatura;
+import javax.swing.JOptionPane;
 
 public class TemperatureWindow extends javax.swing.JFrame {
 
@@ -26,8 +27,8 @@ public class TemperatureWindow extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cbEndCoin = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtResult = new javax.swing.JTextPane();
-        btnClear = new javax.swing.JButton();
+        txtResultT = new javax.swing.JTextPane();
+        btnClearT = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnConvertirTemperatura = new javax.swing.JButton();
 
@@ -70,14 +71,14 @@ public class TemperatureWindow extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane2.setViewportView(txtResult);
+        jScrollPane2.setViewportView(txtResultT);
 
-        btnClear.setBackground(new java.awt.Color(255, 255, 204));
-        btnClear.setFont(new java.awt.Font("Segoe Print", 3, 10)); // NOI18N
-        btnClear.setText("LIMPIAR");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
+        btnClearT.setBackground(new java.awt.Color(255, 255, 204));
+        btnClearT.setFont(new java.awt.Font("Segoe Print", 3, 10)); // NOI18N
+        btnClearT.setText("LIMPIAR");
+        btnClearT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
+                btnClearTActionPerformed(evt);
             }
         });
 
@@ -114,7 +115,7 @@ public class TemperatureWindow extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                                 .addComponent(cbStartingCoin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnClear)
+                                .addComponent(btnClearT)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnConvertirTemperatura)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,7 +156,7 @@ public class TemperatureWindow extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnConvertirTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                    .addComponent(btnClearT, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
@@ -183,10 +184,10 @@ public class TemperatureWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEndCoinActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    private void btnClearTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearTActionPerformed
         txtAmountEntered.setText(""); // Limpiar el campo de cantidad
-        txtResult.setText("");        // Limpiar el campo de resultado
-    }//GEN-LAST:event_btnClearActionPerformed
+        txtResultT.setText("");        // Limpiar el campo de resultado
+    }//GEN-LAST:event_btnClearTActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -197,18 +198,27 @@ public class TemperatureWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnConvertirTemperaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertirTemperaturaActionPerformed
-        cantidad = Double.parseDouble(txtAmountEntered.getText());
+      
+        double cantidad = 0;
         String temperaturaInicial = cbStartingCoin.getSelectedItem().toString();
         String temperaturaFinal = cbEndCoin.getSelectedItem().toString();
         
+        try{
+         cantidad = Double.parseDouble(txtAmountEntered.getText());         
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Por favor, ingrese un valor numérico." );
+            txtAmountEntered.setText(""); // Limpiar el campo de cantidad
+            txtResultT.setText("");        // Limpiar el campo de resultado
+        }
+        
         ConversorTemperatura conversorTemperatura = new ConversorTemperatura(cantidad);
         double resultado = conversorTemperatura.operacionesConversor(temperaturaInicial, temperaturaFinal);           
-        txtResult.setText(Double.toString(resultado));
+        txtResultT.setText(Double.toString(resultado));
     }//GEN-LAST:event_btnConvertirTemperaturaActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnClearT;
     private javax.swing.JButton btnConvertirTemperatura;
     private javax.swing.JComboBox<String> cbEndCoin;
     private javax.swing.JComboBox<String> cbStartingCoin;
@@ -221,6 +231,6 @@ public class TemperatureWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField txtAmountEntered;
-    private javax.swing.JTextPane txtResult;
+    private javax.swing.JTextPane txtResultT;
     // End of variables declaration//GEN-END:variables
 }

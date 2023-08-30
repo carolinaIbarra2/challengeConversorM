@@ -2,6 +2,7 @@ package challengeconversorm.igu;
 
 import challengeconversorm.logica.ConversorMonedas;
 import challengeconversorm.logica.FactorConversionMonedas;
+import javax.swing.JOptionPane;
 
 
 public class CoinWindow extends javax.swing.JFrame {
@@ -47,6 +48,11 @@ public class CoinWindow extends javax.swing.JFrame {
         jLabel2.setText("Digita cantidad:");
 
         txtAmountEntered.setBackground(new java.awt.Color(255, 204, 204));
+        txtAmountEntered.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmountEnteredActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe Print", 0, 12)); // NOI18N
         jLabel3.setText("De:");
@@ -181,10 +187,20 @@ public class CoinWindow extends javax.swing.JFrame {
 
     private void btnConvertMonedasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertMonedasActionPerformed
         //capturar datos
-        cantidad = Double.parseDouble(txtAmountEntered.getText());
+        
         String divisa1 = cbStartingCoin.getSelectedItem().toString();
         String divisa2 = cbEndCoin.getSelectedItem().toString();
-           
+        
+        double cantidad = 0;
+                
+        try{
+         cantidad = Double.parseDouble(txtAmountEntered.getText());         
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Por favor, ingrese un valor numérico." );
+            txtAmountEntered.setText(""); // Limpiar el campo de cantidad
+            txtResult.setText("");        // Limpiar el campo de resultado
+        }
+        
         ConversorMonedas conversorMonedas = new ConversorMonedas(cantidad);
         double resultado = conversorMonedas.operacionesConversor(divisa1, divisa2);           
         txtResult.setText(Double.toString(resultado));
@@ -206,6 +222,10 @@ public class CoinWindow extends javax.swing.JFrame {
         mainWindow.setVisible(true);              //ventana visible
         mainWindow.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtAmountEnteredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountEnteredActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmountEnteredActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
